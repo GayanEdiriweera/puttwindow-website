@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="images/icon.png" />
+    <title>Putt Window: External Camera Putting Setup</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+        background-color: #f4f4f4;
+      }
+      h1 {
+        color: #333;
+        border-bottom: 2px solid #333;
+        padding-bottom: 10px;
+      }
+      h2,
+      h3 {
+        color: #333;
+      }
+      p {
+        margin-bottom: 20px;
+      }
+      ul {
+        margin-left: 20px;
+      }
+      code {
+        background-color: #e0e0e0;
+        padding: 2px 4px;
+        border-radius: 4px;
+      }
+      .container {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>
+        Getting Started with <strong>Putt Window</strong>: External Camera
+        Putting Setup
+      </h1>
+      <p>
+        Welcome to <strong>Putt Window</strong>, your ultimate mixed reality
+        putting experience! Follow these steps to use your real ball and putter
+        with <strong>Putt Window</strong> using an external camera setup.
+      </p>
+
+      <h2>What You'll Need</h2>
+      <ul>
+        <li>
+          A <strong>mixed reality headset</strong> and a copy of
+          <strong>Putt Window</strong>.
+        </li>
+        <li>A <strong>real golf ball</strong> and <strong>putter</strong>.</li>
+        <li>
+          An <strong>external camera-based putting setup</strong> (either
+          <strong>Exputt</strong> or a <strong>webcam</strong>).
+        </li>
+        <li>
+          A laptop or desktop PC running Windows 10 or newer, and the
+          <strong>MLM2PRO-GSPro Connector</strong> software.
+        </li>
+      </ul>
+
+      <h2>Step 1: Download the MLM2PRO-GSPro Connector</h2>
+      <p>
+        1. Visit the
+        <a href="https://github.com/springbok/MLM2PRO-GSPro-Connector"
+          >MLM2PRO-GSPro Connector GitHub repository</a
+        >.
+      </p>
+      <p>
+        2. Follow the instructions provided in the repository to download and
+        install the <strong>MLM2PRO-GSPro Connector</strong> on your PC.
+      </p>
+
+      <h2>Step 2: Set Up Your External Camera Based Putting System</h2>
+      <h3>Option A: Exputt Putting Setup</h3>
+      <p>If you're using an <strong>Exputt</strong>:</p>
+      <ul>
+        <li>
+          Follow the instructions in the repository readme on how to set up the
+          Exputt with the connector.
+        </li>
+      </ul>
+
+      <h3>Option B: Webcam Putting Setup</h3>
+      <p>If you're using a <strong>webcam</strong>:</p>
+      <ul>
+        <li>
+          Follow the instructions in the repository readme on how to set up the
+          webcam with the connector.
+        </li>
+      </ul>
+
+      <h2>Step 3: Configure the MLM2PRO-GSPro Connector</h2>
+      <p>
+        <strong>Putt Window</strong> is compatible with the OpenAPI v1, so the
+        connector software will connect to it as if it were connecting to GSPro.
+      </p>
+      <p>
+        1. Once your camera-based setup is ready, open the
+        <strong>MLM2PRO-GSPro Connector</strong> on your PC.
+      </p>
+      <p>
+        2. In the connector settings, configure the putting settings to work
+        with your camera setup (either Exputt or the webcam).
+      </p>
+      <p>
+        3. Set the <strong>destination IP address</strong> to the IP address of
+        your <strong>mixed reality headset</strong>.
+      </p>
+      <p>
+        4. Ensure that the <strong>port number</strong> is set to
+        <code>1921</code>, which is used by <strong>Putt Window</strong> instead
+        of the standard GSPro port <code>0921</code>.
+      </p>
+
+      <h2>Step 4: Connect the MLM2PRO-GSPro Connector to Putt Window</h2>
+      <p>
+        1. Ensure your mixed reality headset is connected to the same network as
+        the PC running the MLM2PRO-GSPro Connector.
+      </p>
+      <p>
+        2. Launch <strong>Putt Window</strong> in your mixed reality headset.
+      </p>
+      <p>
+        3. In the <strong>MLM2PRO-GSPro Connector</strong> software, point it to
+        the headset IP address, as if connecting to <strong>GSPro</strong>.
+      </p>
+      <p>
+        4. Start the connection, and the connector will now relay the shot data
+        to <strong>Putt Window</strong>.
+      </p>
+
+      <h2>Step 5: Adjust Alignment in <strong>Putt Window</strong></h2>
+      <p>1. Enter setup mode in <strong>Putt Window</strong>.</p>
+      <p>
+        2. Follow the instructions in the headset to align the origin and
+        hitting direction of the virtual putting green with your real putting
+        setup.
+      </p>
+    </div>
+  </body>
+</html>
+
