@@ -2,14 +2,74 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="refresh" content="0;url=setup.html" />
-    <title>Redirecting...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PuttWindow</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        background-color: #f8f8f8;
+        color: #222;
+      }
+
+      .hero {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .content {
+        padding: 2rem;
+        text-align: center;
+      }
+
+      video {
+        width: 100%;
+        max-width: 960px;
+        height: auto;
+        margin: 2rem 0;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      }
+
+      .store-link {
+        display: inline-block;
+        margin-top: 1.5rem;
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+        color: #fff;
+        background-color: #1877f2;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+      }
+
+      .store-link:hover {
+        background-color: #145dc2;
+      }
+    </style>
   </head>
   <body>
-    <p>
-      If you are not redirected automatically, follow the
-      <a href="setup.html">link to setup.html</a>.
-    </p>
+    <img src="HeroCover.png" alt="PuttWindow Hero Banner" class="hero" />
+
+    <div class="content">
+      <video controls autoplay>
+        <source src="RealBallPromo.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      <p>
+        <a
+          class="store-link"
+          href="https://www.meta.com/en-gb/experiences/putt-window/7908645409222708/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Get it on the Meta Quest Store
+        </a>
+      </p>
+    </div>
   </body>
 </html>
 
