@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Putt Window - Real Ball Putting for Quest</title>
+
+    <!-- Preconnect to external domains for faster loading -->
+    <link rel="preconnect" href="https://www.youtube.com" />
+    <link rel="preconnect" href="https://i.ytimg.com" />
+
+    <!-- Only preload critical above-the-fold image -->
     <link rel="preload" href="LogoTransparent.png" as="image" />
-    <link
-      rel="preload"
-      href="PromoHorizontal.mp4"
-      as="video"
-      type="video/mp4"
-    />
 
     <style>
       * {
@@ -27,59 +27,54 @@
         line-height: 1.6;
       }
 
-      #loading-screen {
+      /* Simplified loading indicator - non-blocking */
+      .page-loader {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, #3e5236 0%, #7a9854 100%);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        height: 3px;
+        background: rgba(255, 255, 255, 0.2);
         z-index: 9999;
-        transition: opacity 0.5s ease-out;
+        opacity: 1;
+        transition: opacity 0.3s ease;
       }
 
-      #loading-screen.hidden {
-        opacity: 0;
-        pointer-events: none;
+      .page-loader::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, #1877f2, #0e5dc2);
+        animation: loading 2s ease-in-out;
       }
 
-      .loader {
-        width: 60px;
-        height: 60px;
-        border: 4px solid rgba(255, 255, 255, 0.3);
-        border-top-color: #fff;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-      }
-
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
+      @keyframes loading {
+        0% {
+          width: 0;
+        }
+        50% {
+          width: 70%;
+        }
+        100% {
+          width: 100%;
         }
       }
 
-      .loading-text {
-        margin-top: 1.5rem;
-        font-size: 1.2rem;
-        color: #fff;
-        opacity: 0.9;
+      .page-loader.hidden {
+        opacity: 0;
       }
 
-      body.loading {
-        overflow: hidden;
-      }
-
-      body.loading > *:not(#loading-screen) {
-        visibility: hidden;
+      .hero-section {
+        padding: 2rem 0 1rem;
       }
 
       .hero-section img {
         margin: auto;
         width: 20rem;
+        max-width: 90%;
         display: block;
         height: auto;
       }
@@ -98,6 +93,30 @@
         background-color: #7a9854;
       }
 
+      /* YouTube embed responsive container */
+      .video-container {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        height: 0;
+        overflow: hidden;
+        max-width: 960px;
+        margin: 0 auto;
+        border-radius: 16px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        background-color: #000;
+      }
+
+      .video-container iframe,
+      .video-container video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      /* Fallback for self-hosted video */
       video {
         display: block;
         margin: 0 auto;
@@ -107,7 +126,16 @@
         border-radius: 16px;
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
         background-color: #000;
-        min-height: 400px;
+      }
+
+      /* Add fade-in for images as they load */
+      img {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      img.loaded {
+        opacity: 1;
       }
 
       .cta-primary {
@@ -208,7 +236,7 @@
         width: 100%;
         border-radius: 12px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
+        transition: transform 0.3s ease, opacity 0.3s ease;
         background-color: #e0e0e0;
         min-height: 200px;
       }
@@ -379,14 +407,16 @@
         .requirements-content {
           padding: 2rem;
         }
+
+        .hero-section img {
+          width: 16rem;
+        }
       }
     </style>
   </head>
-  <body class="loading">
-    <div id="loading-screen">
-      <div class="loader"></div>
-      <p class="loading-text">...</p>
-    </div>
+  <body>
+    <!-- Non-blocking progress bar -->
+    <div class="page-loader" id="page-loader"></div>
 
     <div class="hero-section">
       <img
@@ -397,16 +427,15 @@
     </div>
 
     <div class="video-section">
-      <video
-        controls
-        muted
-        loop
-        id="promo-video"
-        poster="PromoHorizontal_Cover.png"
-      >
-        <source src="PromoHorizontal.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      <div class="video-container">
+        <iframe
+          src="https://www.youtube.com/embed/m5Ny8ow8Lyg?autoplay=1&mute=1&loop=1&playlist=m5Ny8ow8Lyg&controls=0&modestbranding=1&rel=0"
+          title="Putt Window Demo"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
       <a
         class="cta-primary"
         href="https://www.meta.com/en-gb/experiences/putt-window/7908645409222708/"
@@ -577,60 +606,44 @@
     </footer>
 
     <script>
-      let assetsLoaded = 0;
-      const totalAssets = 2;
+      // Simple, non-blocking loader
+      window.addEventListener("load", () => {
+        const loader = document.getElementById("page-loader");
+        setTimeout(() => {
+          loader.classList.add("hidden");
+        }, 500);
+      });
 
-      function assetLoaded() {
-        assetsLoaded++;
-        if (assetsLoaded >= totalAssets) {
-          hideLoadingScreen();
-        }
-      }
+      // Image fade-in as they load
+      document
+        .getElementById("hero-image")
+        .addEventListener("load", function () {
+          this.classList.add("loaded");
+        });
 
-      function hideLoadingScreen() {
-        const loadingScreen = document.getElementById("loading-screen");
-        document.body.classList.remove("loading");
-        loadingScreen.classList.add("hidden");
-
-        const video = document.getElementById("promo-video");
-        video.play().catch((e) => console.log("Autoplay prevented:", e));
-
-        lazyLoadImages();
-      }
-
-      const heroImage = document.getElementById("hero-image");
-      if (heroImage.complete) {
-        assetLoaded();
-      } else {
-        heroImage.addEventListener("load", assetLoaded);
-        heroImage.addEventListener("error", assetLoaded);
-      }
-
-      const video = document.getElementById("promo-video");
-      video.addEventListener("loadeddata", assetLoaded);
-      video.addEventListener("error", assetLoaded);
-
-      setTimeout(() => {
-        if (assetsLoaded < totalAssets) {
-          console.log("Loading timeout - showing page anyway");
-          hideLoadingScreen();
-        }
-      }, 5000);
-
+      // Lazy load images with fade-in effect
       function lazyLoadImages() {
         const lazyImages = document.querySelectorAll("img.lazy");
+
         const imageObserver = new IntersectionObserver((entries, observer) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               const img = entry.target;
               img.src = img.dataset.src;
+              img.addEventListener("load", () => {
+                img.classList.add("loaded");
+              });
               img.classList.remove("lazy");
               observer.unobserve(img);
             }
           });
         });
+
         lazyImages.forEach((img) => imageObserver.observe(img));
       }
+
+      // Start lazy loading immediately
+      lazyLoadImages();
     </script>
   </body>
 </html>
