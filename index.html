@@ -4,10 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Putt Window - Real Ball Putting for Quest</title>
-
-    <!-- Preload critical assets -->
-    <link rel="preload" href="HeroCover.png" as="image" />
-    <link rel="preload" href="RealBallPromo.mp4" as="video" type="video/mp4" />
+    <link rel="preload" href="LogoTransparent.png" as="image" />
+    <link
+      rel="preload"
+      href="PromoHorizontal.mp4"
+      as="video"
+      type="video/mp4"
+    />
 
     <style>
       * {
@@ -24,7 +27,6 @@
         line-height: 1.6;
       }
 
-      /* Loading screen */
       #loading-screen {
         position: fixed;
         top: 0;
@@ -67,31 +69,19 @@
         opacity: 0.9;
       }
 
-      /* Prevent flash of unstyled content */
       body.loading {
         overflow: hidden;
       }
 
-      body.loading .hero,
-      body.loading .video-section,
-      body.loading .features,
-      body.loading .screenshots,
-      body.loading .testimonials,
-      body.loading .requirements,
-      body.loading .cta-section,
-      body.loading footer {
+      body.loading > *:not(#loading-screen) {
         visibility: hidden;
       }
 
-      .hero {
-        width: 100%;
-        max-width: 100%;
-        height: auto;
+      .hero-section img {
+        margin: auto;
+        width: 20rem;
         display: block;
-        background: linear-gradient(135deg, #1a4d2e 0%, #7a9854 100%);
-        background-color: #1a4d2e;
-        aspect-ratio: 3000 / 900;
-        object-fit: cover;
+        height: auto;
       }
 
       .container {
@@ -101,7 +91,7 @@
       }
 
       .video-section {
-        padding: 4rem 2rem;
+        padding: 1rem 2rem;
         text-align: center;
         background: url("images/green.png") repeat;
         background-size: 512px 512px;
@@ -163,7 +153,6 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 3rem;
-        margin-bottom: 4rem;
       }
 
       .feature-card {
@@ -198,6 +187,35 @@
         padding: 5rem 2rem;
         background: #f0f4f8;
         color: #222;
+      }
+
+      .screenshots h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: #0a4d2e;
+      }
+
+      .screenshots-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .screenshots-grid img {
+        width: 100%;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        background-color: #e0e0e0;
+        min-height: 200px;
+      }
+
+      .screenshots-grid img:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
       }
 
       .testimonials {
@@ -248,35 +266,6 @@
         font-size: 0.9rem;
       }
 
-      .screenshots h2 {
-        text-align: center;
-        font-size: 2.5rem;
-        margin-bottom: 3rem;
-        color: #0a4d2e;
-      }
-
-      .screenshots-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-        max-width: 1400px;
-        margin: 0 auto;
-      }
-
-      .screenshots-grid img {
-        width: 100%;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-        background-color: #e0e0e0;
-        min-height: 200px;
-      }
-
-      .screenshots-grid img:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-      }
-
       .requirements {
         padding: 5rem 2rem;
         background: #fff;
@@ -311,8 +300,7 @@
       }
 
       .requirements li {
-        padding: 0.8rem 0;
-        padding-left: 2rem;
+        padding: 0.8rem 0 0.8rem 2rem;
         position: relative;
         color: #444;
         font-size: 1.1rem;
@@ -382,6 +370,7 @@
       @media (max-width: 768px) {
         .features h2,
         .screenshots h2,
+        .testimonials h2,
         .requirements h2,
         .cta-section h2 {
           font-size: 2rem;
@@ -394,18 +383,18 @@
     </style>
   </head>
   <body class="loading">
-    <!-- Loading Screen -->
     <div id="loading-screen">
       <div class="loader"></div>
       <p class="loading-text">...</p>
     </div>
 
-    <img
-      src="HeroCover.png"
-      alt="Putt Window - Mixed Reality Putting Simulator"
-      class="hero"
-      id="hero-image"
-    />
+    <div class="hero-section">
+      <img
+        src="LogoTransparent.png"
+        alt="Putt Window - Mixed Reality Putting Simulator"
+        id="hero-image"
+      />
+    </div>
 
     <div class="video-section">
       <video
@@ -413,9 +402,9 @@
         muted
         loop
         id="promo-video"
-        poster="RealBallPromo_Cover.png"
+        poster="PromoHorizontal_Cover.png"
       >
-        <source src="RealBallPromo.mp4" type="video/mp4" />
+        <source src="PromoHorizontal.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       <a
@@ -424,7 +413,7 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        Get it on the Meta Quest Store
+        Get it now on Meta Quest
       </a>
     </div>
 
@@ -434,7 +423,6 @@
         <p class="features-subtitle">
           The closest thing to real putting without leaving home.
         </p>
-
         <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon">⛳</div>
@@ -444,7 +432,6 @@
               your space and seamlessly transition into the virtual world.
             </p>
           </div>
-
           <div class="feature-card">
             <div class="feature-icon">🏠</div>
             <h3>Practice at Home</h3>
@@ -453,7 +440,6 @@
               closest thing to real putting without leaving home.
             </p>
           </div>
-
           <div class="feature-card">
             <div class="feature-icon">🎯</div>
             <h3>True-to-Life Feel</h3>
@@ -507,7 +493,6 @@
           </p>
           <p class="testimonial-author">— Quest Store Review</p>
         </div>
-
         <div class="testimonial-card">
           <div class="testimonial-rating">★★★★★</div>
           <p class="testimonial-text">
@@ -519,7 +504,6 @@
           </p>
           <p class="testimonial-author">— Quest Store Review</p>
         </div>
-
         <div class="testimonial-card">
           <div class="testimonial-rating">★★★★★</div>
           <p class="testimonial-text">
@@ -547,14 +531,12 @@
             <li>A backstop or cushion to prevent the ball rolling away</li>
             <li>Good lighting for consistent tracking</li>
           </ul>
-
           <div class="note">
             <strong>Note:</strong> The putting surface should contrast with the
             ball. A white ball on a darker colored surface works well. The
             tracking area (1x2ft) should be free of lines/markings of similar
             color to the ball.
           </div>
-
           <p style="margin-top: 2rem; color: #666; font-size: 1rem">
             <em
               >You can also play using Quest Touch Controllers, but the full
@@ -595,9 +577,8 @@
     </footer>
 
     <script>
-      // Asset loading management
       let assetsLoaded = 0;
-      const totalAssets = 2; // hero image + video
+      const totalAssets = 2;
 
       function assetLoaded() {
         assetsLoaded++;
@@ -611,15 +592,12 @@
         document.body.classList.remove("loading");
         loadingScreen.classList.add("hidden");
 
-        // Start video autoplay after loading
         const video = document.getElementById("promo-video");
         video.play().catch((e) => console.log("Autoplay prevented:", e));
 
-        // Lazy load screenshot images
         lazyLoadImages();
       }
 
-      // Hero image loading
       const heroImage = document.getElementById("hero-image");
       if (heroImage.complete) {
         assetLoaded();
@@ -628,12 +606,10 @@
         heroImage.addEventListener("error", assetLoaded);
       }
 
-      // Video loading
       const video = document.getElementById("promo-video");
       video.addEventListener("loadeddata", assetLoaded);
       video.addEventListener("error", assetLoaded);
 
-      // Fallback timeout to prevent infinite loading
       setTimeout(() => {
         if (assetsLoaded < totalAssets) {
           console.log("Loading timeout - showing page anyway");
@@ -641,10 +617,8 @@
         }
       }, 5000);
 
-      // Lazy load images
       function lazyLoadImages() {
         const lazyImages = document.querySelectorAll("img.lazy");
-
         const imageObserver = new IntersectionObserver((entries, observer) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
@@ -655,7 +629,6 @@
             }
           });
         });
-
         lazyImages.forEach((img) => imageObserver.observe(img));
       }
     </script>
